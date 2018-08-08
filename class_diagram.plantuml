@@ -21,9 +21,15 @@ CData <|-- CPrivateSection
 
 
 CPrivateSection <|-- CSectionPat
+
 CPrivateSection <|-- CSectionPmt
+
 CPrivateSection <|-- CSectionCat
+
 CPrivateSection <|-- CSectionNit
+
 CPrivateSection <|-- CSectionEcm
+
 CPrivateSection <|-- CSectionEmm
+
 @enduml
