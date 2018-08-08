@@ -1,0 +1,5 @@
+@startuml
+CData <|-- CPrivateSection
+
+CPrivateSection <|-- CSectionPat
+@enduml
