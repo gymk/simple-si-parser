@@ -1,8 +1,6 @@
 @startuml
 
-class CDescriptor
-{
-    const SIP_UI8 * & m_pui8Data
+class CDescriptor {
     const SIP_UI8 * & m_pui8Data
     GetTag()
     GetLength()
@@ -10,11 +8,19 @@ class CDescriptor
     GetData()
 }
 
-class CDescriptorList
-{
+class CDescriptorList {
     GetTotalLength()
     InitList()
     GetDescriptorPtr()
+}
+
+class CData {
+    const SIP_UI8 * m_pui8Data
+    SIP_UI32        m_ui32DataLen
+    SetData()
+    GetLen()
+    GetData()
+    HexDump()
 }
 
 CData <|-- CPrivateSection
