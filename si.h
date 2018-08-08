@@ -1,6 +1,8 @@
 #ifndef __SIMPLE_DVB_SI_PARSER_H__
     #define __SIMPLE_DVB_SI_PARSER_H__
 
+#include <cstdio>
+
 /*
  * I am using nullptr and uniform-initialization
  * so minimum C++11 required
@@ -30,11 +32,38 @@ public:
     CData():m_pui8Data{nullptr},m_ui32DataLen{0}
     {}
 
+    // Set buffer, its size
     inline void SetData(SIP_UI8 * pui8Data, SIP_UI32 ui32DataLen)
     {
         m_pui8Data = pui8Data;
         m_ui32DataLen = ui32DataLen;
     }
+    // Get Data Buffer length
+    SIP_UI32 GetLen(void) const { return m_ui32DataLen; }
+    // Get Data Buffer
+    const SIP_UI8 * GetData(void)
+    {
+        return m_pui8Data;
+    }
+
+    // Dump function
+    void HexDump(const SIP_UI8 * pui8Buffer = nullptr, SIP_UI32 ui32Start = 0, SIP_UI32 ui32End = 0)
+    {
+        if(nullptr == pui8Buffer)
+        {
+            pui8Buffer = m_pui8Data;
+            ui32End = m_ui32DataLen;
+        }
+        for(SIP_UI32 ui32Loop = ui32Start; ui32Loop < ui32End; ++ui32Loop)
+        {
+            printf("%02X ", *pui8Buffer++);
+            if(((ui32Loop % 16) == 0) && ui32Loop)
+            {
+                printf("\n");
+            }
+        }
+    }
+
 protected:
     const SIP_UI8 * m_pui8Data;
     SIP_UI32        m_ui32DataLen;
