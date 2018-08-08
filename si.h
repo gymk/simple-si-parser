@@ -47,6 +47,9 @@ public:
     }
 
     // Dump function
+    // If invoked without any parameter, it will dump whole data contained by this object
+    // Otherwise it will dump (optionally you can use different buffer as well to dump)
+    // of passed values
     void HexDump(const SIP_UI8 * pui8Buffer = nullptr, SIP_UI32 ui32Start = 0, SIP_UI32 ui32End = 0)
     {
         if(nullptr == pui8Buffer)
@@ -100,14 +103,14 @@ public:
     // Get total descriptor list length
     inline SIP_UI32 GetTotalLength(void) const { return m_ui32DescListLen; }
     // Initialize the list for traversing
-    inline void InitList(void)
+    inline void InitList(void) const
     {
         m_pTemp = m_pui8Data;
     }
     // Get next available descriptor in descriptor list
     // if available it will return the descriptor and move to next descriptor
     // otherwise it will return nullptr
-    inline const SIP_UI8 * GetDescriptorPtr(void)
+    inline const SIP_UI8 * GetDescriptorPtr(void) const
     {
         if((m_pTemp - m_pui8Data) >= m_ui32DescListLen)
             return nullptr;
@@ -123,7 +126,7 @@ public:
 protected:
     const SIP_UI8 * &   m_pui8Data;
     SIP_UI32            m_ui32DescListLen;
-    const SIP_UI8 * m_pTemp;
+    mutable const SIP_UI8 * m_pTemp;  // Used only for travesing, not for content modification. So this is mutable
 };
 
 }  // namespace simple_si_parser
