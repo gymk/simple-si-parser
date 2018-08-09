@@ -2,27 +2,27 @@
 
 class CDescriptor {
     const SIP_UI8 * & m_pui8Data
-    GetTag()
-    GetLength()
-    GetTotalLength()
-    GetData()
+    SIP_UI8 GetTag()
+    SIP_UI8 GetLength()
+    SIP_UI8 GetTotalLength()
+    const SIP_UI8* GetData()
 }
 
 class CDescriptorList {
     const SIP_UI8 * & m_pui8Data
     SIP_UI16          m_ui16DescListLen
-    GetTotalLength()
-    InitList()
-    GetDescriptorPtr()
+    SIP_UI32 GetTotalLength()
+    void InitList()
+    const SIP_UI8* GetDescriptorPtr()
 }
 
 class CData {
     const SIP_UI8 * m_pui8Data
     SIP_UI32        m_ui32DataLen
-    SetData()
-    GetLen()
-    GetData()
-    HexDump()
+    void SetData()
+    SIP_UI32 GetLen()
+    const SIP_UI8* GetData()
+    void HexDump()
 }
 
 class CPrivateSection {
@@ -43,6 +43,57 @@ class CPrivateSection {
     bool ValidateCRC()
     bool isSectionValid()
     void PrintSectionInfo()
+}
+
+class CPatSection {
+    bool isValidPAT()
+    SIP_UI16 GetTransportStreamID()
+    SIP_UI8 GetNoOfProgramsInList()
+    void InitProgList()
+    void GetProgramInfo()
+    bool MoveToNextProgramInfo()
+    void PrintPAT()
+}
+
+class CPmtSection {
+    bool isValidPMT()
+    SIP_UI16 GetProgramNumber()
+    SIP_UI16 GetPcrPid()
+    SIP_UI16 GetProgramInfoLength()
+    const SIP_UI8* GetProgramInfoDescBuf()
+    SIP_UI16 GetStreamInfoLength()
+    const SIP_UI8* GetStreamInfoBuffer()
+    void InitStreamInfoList()
+    SIP_UI8 GetStreamType()
+    SIP_UI16 GetStreamPid()
+    SIP_UI16 GetESInfoLength()
+    const SIP_UI8* GetESInfoDescBuff()
+    bool MoveToNextStreamInfoInList()
+    void PrintPMT()
+}
+
+class CCatSection {
+    bool isValidCAT()
+    const SIP_UI8* GetDescriptorListBuffer()
+    SIP_UI16 GetDescriptorListBufferLength()
+    void PrintCAT()
+}
+
+class CEcmSection {
+    bool isValidECM()
+    const SIP_UI8* GetEcmDataBuffer()
+    SIP_UI16 GetEcmDataBufferLength()
+    void PrintECM()
+}
+
+class CNitSection {
+    bool isValidNIT()
+    void printNIT()
+}
+
+class CEmmSection {
+    bool isValidEMM()
+    void PrintEMM()
 }
 
 CData <|-- CPrivateSection
