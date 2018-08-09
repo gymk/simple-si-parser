@@ -9,6 +9,8 @@ class CDescriptor {
 }
 
 class CDescriptorList {
+    const SIP_UI8 * & m_pui8Data
+    SIP_UI16          m_ui16DescListLen
     GetTotalLength()
     InitList()
     GetDescriptorPtr()
@@ -23,19 +25,39 @@ class CData {
     HexDump()
 }
 
+class CPrivateSection {
+    SIP_UI8 GetTableID()
+    SIP_UI8 GetSSI()
+    SIP_UI16 GetSectionLegnth()
+    SIP_UI16 GetTableIdExtension()
+    SIP_UI8 GetVersionNo()
+    SIP_UI8 GetCNI()
+    SIP_UI8 GetSectionNumber()
+    SIP_UI8 GetLastSectionNumber()
+    const SIP_UI8* GetDescriptorList()
+    const SIP_UI8* GetPrivateData()
+    SIP_UI16 GetPrivateDataLength()
+    SIP_UI32 GetSectionCRC()
+    SIP_UI32 GetCalculatedCRC()
+    SIP_UI32 GetFullDataCRC()
+    bool ValidateCRC()
+    bool isSectionValid()
+    void PrintSectionInfo()
+}
+
 CData <|-- CPrivateSection
 
 
-CPrivateSection <|-- CSectionPat
+CPrivateSection <|-- CPatSection
 
-CPrivateSection <|-- CSectionPmt
+CPrivateSection <|-- CPmtSection
 
-CPrivateSection <|-- CSectionCat
+CPrivateSection <|-- CCatSection
 
-CPrivateSection <|-- CSectionNit
+CPrivateSection <|-- CNitSection
 
-CPrivateSection <|-- CSectionEcm
+CPrivateSection <|-- CEcmSection
 
-CPrivateSection <|-- CSectionEmm
+CPrivateSection <|-- CEmmSection
 
 @enduml
